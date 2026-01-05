@@ -77,6 +77,8 @@ npm run build      # Build for production
 npm start          # Start production server
 npm run lint       # Run ESLint
 npm run typecheck  # Run TypeScript type checking
+npm test           # Run Jest tests
+npm run test:watch # Run tests in watch mode
 ```
 
 ## Pages and Routes
@@ -90,12 +92,21 @@ All routes are prefixed with locale (`/ko` or `/en`):
 - `/en/company` - Company page (English)
 - `/ko/product/entertainment` - Product page (Korean)
 - `/en/product/entertainment` - Product page (English)
-- `/ko/pricing` - Pricing page (Korean)
-- `/en/pricing` - Pricing page (English)
+- `/ko/pricing` - **NEW: Single-plan pricing page** (Korean)
+- `/en/pricing` - **NEW: Single-plan pricing page** (English)
 - `/ko/contact` - Contact page (Korean)
 - `/en/contact` - Contact page (English)
 
 Language switcher in navigation preserves the current route.
+
+### Pricing Page Features
+
+The pricing page presents a single "HEIMDEX Access" plan with:
+- Workflow-based custom quote positioning (no numeric price)
+- Complete feature list (automated processing, hybrid search, exports, analytics)
+- Collapsible pricing factors accordion (volume, search usage, deployment)
+- Trust section (privacy, customization, transparency)
+- Primary CTA: "Arrange a call with Heimdex" → `/contact`
 
 ## Project Structure
 
