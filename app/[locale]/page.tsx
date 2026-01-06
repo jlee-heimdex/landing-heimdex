@@ -3,6 +3,7 @@ import Hero from '@/components/sections/Hero'
 import ContentSection from '@/components/sections/ContentSection'
 import FeatureCard from '@/components/sections/FeatureCard'
 import BackedBy from '@/components/sections/BackedBy'
+import ProductShowcase from '@/components/sections/ProductShowcase'
 import { getBookingLink } from '@/lib/i18n'
 
 interface HomePageProps {
@@ -38,6 +39,12 @@ export default async function HomePage({ params }: HomePageProps) {
       feature3Desc: 'AI가 24/7 실시간으로 YouTube·TikTok·Instagram을 모니터링하여 무단 복제를 탐지합니다.',
       backedByHeadline: '믿을 수 있는 파트너와 함께',
       backedBySubhead: 'HEIMDEX는 글로벌 벤처캐피탈 Antler의 투자를 받아 성장하고 있습니다.',
+      showcase1Title: '단어만으로 영상 속 모든 장면을 찾아냅니다',
+      showcase1Desc: '사람 이름, 장소, 대사, 감정까지. HEIMDEX의 AI 검색은 영상 전체를 이해하고 원하는 순간을 정확히 찾아냅니다. 더 이상 타임라인을 스크롤하지 마세요.',
+      showcase2Title: '장면별 자동 요약으로 시간을 절약하세요',
+      showcase2Desc: '긴 영상도 AI가 자동으로 장면을 나누고 핵심 내용을 요약합니다. 트랜스크립트, 시각 분석, 감정 분석까지. 영상을 보지 않아도 모든 정보를 한눈에 파악할 수 있습니다.',
+      showcase3Title: '모든 영상을 한 곳에서 관리하세요',
+      showcase3Desc: '흩어진 영상 파일들을 HEIMDEX 대시보드에서 통합 관리하세요. 자동 분류, 상태 추적, 빠른 검색. 영상 관리가 이렇게 쉬울 수 있습니다.',
     },
     en: {
       badge: 'AI-powered video management, search, and distribution protection all-in-one',
@@ -63,6 +70,12 @@ export default async function HomePage({ params }: HomePageProps) {
       feature3Desc: 'AI monitors YouTube, TikTok, and Instagram 24/7 in real-time to detect unauthorized copies.',
       backedByHeadline: 'Trusted Partners',
       backedBySubhead: 'HEIMDEX is backed by Antler, a global early-stage venture capital firm.',
+      showcase1Title: 'Find every scene with just words',
+      showcase1Desc: "Person names, locations, dialogues, even emotions. HEIMDEX's AI search understands your entire video library and finds exactly what you need. Stop scrubbing through timelines.",
+      showcase2Title: 'Save time with automatic scene summaries',
+      showcase2Desc: 'Even long videos are automatically segmented and summarized by AI. Transcripts, visual analysis, emotion detection. Get all the information at a glance without watching.',
+      showcase3Title: 'Manage all your videos in one place',
+      showcase3Desc: 'Centralize your scattered video files in the HEIMDEX dashboard. Automatic classification, status tracking, instant search. Video management has never been this easy.',
     },
   }
 
@@ -100,6 +113,32 @@ export default async function HomePage({ params }: HomePageProps) {
           <FeatureCard title={text.feature3Title} description={text.feature3Desc} />
         </div>
       </ContentSection>
+
+      <ProductShowcase
+        title={text.showcase1Title}
+        description={text.showcase1Desc}
+        imageSrc="/images/products/search-view.png"
+        imageAlt="HEIMDEX AI Search Interface"
+        imagePosition="right"
+        className="bg-surface-950"
+      />
+
+      <ProductShowcase
+        title={text.showcase2Title}
+        description={text.showcase2Desc}
+        imageSrc="/images/products/video-detail-page.png"
+        imageAlt="HEIMDEX Scene-by-Scene Breakdown"
+        imagePosition="left"
+      />
+
+      <ProductShowcase
+        title={text.showcase3Title}
+        description={text.showcase3Desc}
+        imageSrc="/images/products/dashboard.png"
+        imageAlt="HEIMDEX Dashboard"
+        imagePosition="right"
+        className="bg-surface-950"
+      />
 
       <BackedBy headline={text.backedByHeadline} subhead={text.backedBySubhead} />
     </>
