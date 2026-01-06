@@ -5,7 +5,7 @@ import { Locale } from '@/lib/types'
 import { PageContent, PageSlug } from './schema'
 import { getContentFilePath } from './map'
 
-const CONTENT_DIR = path.join(process.cwd())
+const CONTENT_DIR = path.join(process.cwd(), 'docs')
 
 export async function loadPageContent(
   slug: PageSlug,

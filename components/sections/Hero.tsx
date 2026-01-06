@@ -58,9 +58,15 @@ export default function Hero({
         )}
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          <Link href={ctaHref} className="btn btn-gradient text-lg px-8 py-4">
-            {ctaText}
-          </Link>
+          {ctaHref.startsWith('http') ? (
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn btn-gradient text-lg px-8 py-4">
+              {ctaText}
+            </a>
+          ) : (
+            <Link href={ctaHref} className="btn btn-gradient text-lg px-8 py-4">
+              {ctaText}
+            </Link>
+          )}
         </div>
 
         {children && <div className="mt-16">{children}</div>}

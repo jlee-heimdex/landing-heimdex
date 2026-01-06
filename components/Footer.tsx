@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Locale } from '@/lib/types'
-import { getLocalizedPath } from '@/lib/i18n'
+import { getLocalizedPath, getBookingLink } from '@/lib/i18n'
 
 interface FooterProps {
   locale: Locale
@@ -54,11 +54,11 @@ export default function Footer({ locale }: FooterProps) {
             <div className="text-sm text-surface-400 space-y-1">
               <div><span className="font-medium">{text.email}:</span> heimdex@heimdex.co</div>
               <div><span className="font-medium">{text.website}:</span> heimdex.co</div>
-              <div><span className="font-medium">{text.address}:</span> {locale === 'ko' ? '서울특별시 마포구 백범로31길 21' : '21 Baekbeom-ro 31-gil, Mapo-gu, Seoul'}</div>
+              <div><span className="font-medium">{text.address}:</span> {locale === 'ko' ? '광주광역시 북구 안산로 75 (삼각동)' : '75 Ansan-ro, Buk-gu, Gwangju'}</div>
             </div>
-            <Link href={getLocalizedPath('/contact', locale)} className="btn btn-gradient text-sm">
+            <a href={getBookingLink(locale)} target="_blank" rel="noopener noreferrer" className="btn btn-gradient text-sm">
               {text.cta}
-            </Link>
+            </a>
           </div>
         </div>
 

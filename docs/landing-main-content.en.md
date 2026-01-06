@@ -180,7 +180,23 @@
 
 ---
 
-## 7) Testimonials Section
+## 7) Backed By Section
+
+**Headline**
+
+* Trusted Partners
+
+**Subhead**
+
+* HEIMDEX is backed by Antler, a global early-stage venture capital firm.
+
+**Logos**
+
+* Antler
+
+---
+
+## 8) Testimonials Section
 
 **Headline**
 
@@ -206,7 +222,7 @@
 
 ---
 
-## 8) Conversion Section
+## 9) Conversion Section
 
 **Headline**
 
@@ -226,7 +242,7 @@
 
 ---
 
-## 9) Footer
+## 10) Footer
 
 **English line**
 

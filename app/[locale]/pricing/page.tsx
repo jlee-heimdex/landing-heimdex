@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { Locale } from '@/lib/types'
 import { getPricingContent } from '@/lib/pricing-content'
-import { getLocalizedPath } from '@/lib/i18n'
+import { getBookingLink } from '@/lib/i18n'
 import PricingHero from '@/components/pricing/PricingHero'
 import PricingCard from '@/components/pricing/PricingCard'
 import PricingFactorsAccordion from '@/components/pricing/PricingFactorsAccordion'
@@ -47,7 +47,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
   const resolvedParams = await params
   const locale = resolvedParams.locale as Locale
   const content = getPricingContent(locale)
-  const contactPath = getLocalizedPath('/contact', locale)
+  const bookingLink = getBookingLink(locale)
 
   return (
     <div className="page-wrapper">
@@ -57,7 +57,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
         subheadline={content.hero.subheadline}
         cta={content.hero.cta}
         ctaMicrocopy={content.hero.ctaMicrocopy}
-        ctaHref={contactPath}
+        ctaHref={bookingLink}
       />
 
       {/* Pricing Card Section */}
@@ -70,7 +70,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
             features={content.plan.features}
             deploymentOptions={content.plan.deploymentOptions}
             cta={content.hero.cta}
-            ctaHref={contactPath}
+            ctaHref={bookingLink}
           />
         </div>
       </section>
@@ -99,7 +99,7 @@ export default async function PricingPage({ params }: PricingPageProps) {
             heading={content.finalCTA.heading}
             cta={content.finalCTA.cta}
             microcopy={content.finalCTA.microcopy}
-            ctaHref={contactPath}
+            ctaHref={bookingLink}
           />
         </div>
       </section>

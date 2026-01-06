@@ -1,5 +1,6 @@
 import { Locale } from '@/lib/types'
 import ContentSection from '@/components/sections/ContentSection'
+import { getBookingLink } from '@/lib/i18n'
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>
@@ -12,14 +13,14 @@ export default async function ContactPage({ params }: ContactPageProps) {
   const t = {
     ko: {
       title: 'HEIMDEX 데모 상담을 예약하세요',
-      subtitle: '15분 통화로 현재 영상 관리 방식과 문제를 빠르게 진단하고, HEIMDEX가 줄일 수 있는 작업 시간을 함께 계산해드립니다.',
-      ctaButton: '통화 예약하기',
+      subtitle: '15분 상담으로 현재 영상 관리 방식과 문제를 빠르게 진단하고, HEIMDEX가 줄일 수 있는 작업 시간을 함께 계산해드립니다.',
+      ctaButton: '상담 예약하기',
       helper: '영업 메일 없이, 필요한 정보만 안내드립니다.',
       contactTitle: '문의 정보',
       email: '이메일',
       website: '웹사이트',
       address: '주소',
-      addressValue: '서울특별시 마포구 백범로31길 21',
+      addressValue: '광주광역시 북구 안산로 75 (삼각동)',
     },
     en: {
       title: 'Book a HEIMDEX demo consultation',
@@ -30,7 +31,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
       email: 'Email',
       website: 'Website',
       address: 'Address',
-      addressValue: '21 Baekbeom-ro 31-gil, Mapo-gu, Seoul',
+      addressValue: '75 Ansan-ro, Buk-gu, Gwangju',
     },
   }
 
@@ -43,7 +44,9 @@ export default async function ContactPage({ params }: ContactPageProps) {
           {/* CTA Section */}
           <div className="card text-center mb-12">
             <a
-              href="mailto:heimdex@heimdex.co?subject=Demo Request"
+              href={getBookingLink(locale)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-gradient text-lg px-8 py-4 inline-flex"
             >
               {text.ctaButton}

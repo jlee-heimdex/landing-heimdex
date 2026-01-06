@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Locale } from '@/lib/types'
-import { extractPathWithoutLocale, getLocalizedPath } from '@/lib/i18n'
+import { extractPathWithoutLocale, getLocalizedPath, getBookingLink } from '@/lib/i18n'
 
 interface NavigationProps {
   locale: Locale
@@ -85,9 +85,9 @@ export default function Navigation({ locale }: NavigationProps) {
             >
               {locale === 'ko' ? 'EN' : 'KO'}
             </Link>
-            <Link href={getLocalizedPath('/contact', locale)} className="btn btn-primary text-sm">
+            <a href={getBookingLink(locale)} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-sm">
               {locale === 'ko' ? '등록하기' : 'Sign Up'}
-            </Link>
+            </a>
           </div>
         </div>
       </div>

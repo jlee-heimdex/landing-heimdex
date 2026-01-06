@@ -45,8 +45,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Copy markdown content files
-COPY --from=builder /app/*.md ./
+# Copy markdown content files from docs directory
+COPY --from=builder /app/docs ./docs
 
 USER nextjs
 

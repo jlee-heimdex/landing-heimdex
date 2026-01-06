@@ -1,7 +1,7 @@
 import { Locale } from '@/lib/types'
 import Hero from '@/components/sections/Hero'
 import ContentSection from '@/components/sections/ContentSection'
-import { getLocalizedPath } from '@/lib/i18n'
+import { getBookingLink } from '@/lib/i18n'
 
 interface CompanyPageProps {
   params: Promise<{ locale: string }>
@@ -59,7 +59,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
         subhead={text.subhead}
         description={text.description}
         ctaText={text.cta}
-        ctaHref={getLocalizedPath('/contact', locale)}
+        ctaHref={getBookingLink(locale)}
       />
 
       <ContentSection title={text.missionTitle}>
@@ -86,7 +86,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
           <div className="grid sm:grid-cols-2 gap-4">
             {locale === 'ko' ? (
               <>
-                <div className="card"><strong>다중 모달 이해</strong>: 영상, 오디오, 텍스트, 메타데이터를 함께 분석</div>
+                <div className="card"><strong>멀티 모달 이해</strong>: 영상, 오디오, 텍스트, 메타데이터를 함께 분석</div>
                 <div className="card"><strong>의미론적 검색</strong>: 키워드가 아닌 의미로 장면 검색</div>
                 <div className="card"><strong>제로 업로드 아키텍처</strong>: 영상이 있는 곳에서 바로 처리</div>
                 <div className="card"><strong>실시간 모니터링</strong>: 플랫폼 전반에 걸쳐 무단 배포를 자동으로 감지</div>

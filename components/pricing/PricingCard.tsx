@@ -68,9 +68,15 @@ export default function PricingCard({
         </div>
 
         {/* CTA */}
-        <Link href={ctaHref} className="btn btn-primary w-full text-center">
-          {cta}
-        </Link>
+        {ctaHref.startsWith('http') ? (
+          <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full text-center">
+            {cta}
+          </a>
+        ) : (
+          <Link href={ctaHref} className="btn btn-primary w-full text-center">
+            {cta}
+          </Link>
+        )}
       </div>
     </div>
   )

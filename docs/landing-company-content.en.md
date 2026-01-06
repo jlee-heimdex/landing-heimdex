@@ -20,6 +20,22 @@
 
 ---
 
+## Backed By Section
+
+### Section title
+* Our Partners
+
+### Headline
+* Trusted by Global Venture Capital
+
+### Description
+* HEIMDEX is backed by Antler, developing cutting-edge video intelligence technology. Antler is a global venture builder supporting early-stage startups in over 25 cities worldwide.
+
+### Logos
+* Antler
+
+---
+
 ## Our Mission Section
 
 ### Section title

@@ -39,9 +39,15 @@ export default function PricingHero({
         </p>
 
         <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <Link href={ctaHref} className="btn btn-gradient text-lg px-8 py-4 inline-flex">
-            {cta}
-          </Link>
+          {ctaHref.startsWith('http') ? (
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn btn-gradient text-lg px-8 py-4 inline-flex">
+              {cta}
+            </a>
+          ) : (
+            <Link href={ctaHref} className="btn btn-gradient text-lg px-8 py-4 inline-flex">
+              {cta}
+            </Link>
+          )}
           <p className="text-sm text-surface-500 mt-3">{ctaMicrocopy}</p>
         </div>
       </div>

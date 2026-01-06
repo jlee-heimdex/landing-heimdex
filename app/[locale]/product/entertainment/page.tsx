@@ -2,7 +2,7 @@ import { Locale } from '@/lib/types'
 import Hero from '@/components/sections/Hero'
 import ContentSection from '@/components/sections/ContentSection'
 import FeatureCard from '@/components/sections/FeatureCard'
-import { getLocalizedPath } from '@/lib/i18n'
+import { getBookingLink } from '@/lib/i18n'
 
 interface ProductPageProps {
   params: Promise<{ locale: string }>
@@ -68,7 +68,7 @@ export default async function ProductEntertainmentPage({ params }: ProductPagePr
         subhead={text.subhead}
         description={text.description}
         ctaText={text.cta}
-        ctaHref={getLocalizedPath('/contact', locale)}
+        ctaHref={getBookingLink(locale)}
       />
 
       <ContentSection title={text.solutionsTitle} subtitle={text.solutionsSubtitle}>

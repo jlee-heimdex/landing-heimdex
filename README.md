@@ -14,12 +14,17 @@ Production-grade, fully containerized Next.js landing page for HEIMDEX with bili
 
 ## Content Structure
 
-All page content is sourced from markdown files in the root directory:
+All page content is sourced from markdown files in the `docs/` directory:
 
-- `landing-main-content.md` / `landing-main-content.en.md` - Home page content
-- `landing-company-content.md` / `landing-company-content.en.md` - Company page
-- `landing-product-entertainment-content.md` / `landing-product-entertainment-content.en.md` - Product page
-- `groundtruth-ui.md` - Design system specification
+- `docs/landing-main-content.md` / `docs/landing-main-content.en.md` - Home page content
+- `docs/landing-company-content.md` / `docs/landing-company-content.en.md` - Company page
+- `docs/landing-product-entertainment-content.md` / `docs/landing-product-entertainment-content.en.md` - Product page
+- `docs/groundtruth-ui.md` - Design system specification
+- `docs/PRICING-PAGE-SUMMARY.md` - Pricing page reference guide
+
+Development logs are stored in `devlogs/`:
+- `devlogs/DEVLOG.md` - Main development log
+- `devlogs/DEVLOG-PRICING.md` - Pricing page development log
 
 ## Quick Start
 
@@ -127,20 +132,40 @@ The pricing page presents a single "HEIMDEX Access" plan with:
 ├── components/
 │   ├── Navigation.tsx         # Top navigation with language switcher
 │   ├── Footer.tsx             # Footer
-│   └── sections/              # Reusable section components
+│   ├── sections/              # Reusable section components
+│   └── pricing/               # Pricing-specific components
 ├── lib/
 │   ├── types.ts               # Locale types
-│   └── i18n.ts                # i18n utilities
+│   ├── i18n.ts                # i18n utilities
+│   └── pricing-content.ts     # Pricing page i18n dictionary
 ├── content/
 │   ├── schema.ts              # Content type definitions
 │   ├── loaders.ts             # Content loading logic
 │   └── map.ts                 # Route-to-content mapping
+├── docs/                      # Documentation and content markdown files
+│   ├── landing-main-content.md / .en.md
+│   ├── landing-company-content.md / .en.md
+│   ├── landing-product-entertainment-content.md / .en.md
+│   ├── groundtruth-ui.md      # Design system spec
+│   └── PRICING-PAGE-SUMMARY.md
+├── devlogs/                   # Development logs
+│   ├── DEVLOG.md
+│   └── DEVLOG-PRICING.md
 ├── public/                    # Static assets
-├── landing-heimdex/           # Markdown content files (source of truth)
+│   ├── favicon.ico
+│   └── images/                # Image assets
+│       ├── hero/              # Hero section images
+│       ├── products/          # Product screenshots/demos
+│       ├── company/           # Company/about images
+│       ├── team/              # Team photos
+│       ├── logos/             # Brand logos/partners
+│       └── og/                # OpenGraph social images
+├── __tests__/                 # Jest test files
 ├── Dockerfile                 # Production multi-stage build
 ├── Dockerfile.dev             # Development with hot reload
 ├── docker-compose.yml         # Docker services configuration
 ├── Makefile                   # Command shortcuts
+├── jest.config.js             # Jest configuration
 ├── next.config.js
 ├── tailwind.config.ts
 ├── tsconfig.json
@@ -202,7 +227,7 @@ No environment variables are required.
 
 ## Design System
 
-The UI follows the design spec in `groundtruth-ui.md`:
+The UI follows the design spec in `docs/groundtruth-ui.md`:
 
 - **Colors**: Dark theme with cyan/violet/pink gradient accents
 - **Typography**: Outfit font family (Google Fonts)
@@ -215,10 +240,51 @@ See `app/globals.css` for the complete design system implementation.
 
 To update page content:
 
-1. Edit the relevant markdown file in the root directory
-2. For Korean: `landing-main-content.md`, `landing-company-content.md`, etc.
-3. For English: `landing-main-content.en.md`, `landing-company-content.en.md`, etc.
+1. Edit the relevant markdown file in the `docs/` directory
+2. For Korean: `docs/landing-main-content.md`, `docs/landing-company-content.md`, etc.
+3. For English: `docs/landing-main-content.en.md`, `docs/landing-company-content.en.md`, etc.
 4. Content is loaded at build time (no rebuild needed for dev server with hot reload)
+
+## Assets and Images
+
+Store image assets in the `public/images/` directory organized by purpose:
+
+- **`public/images/hero/`** - Hero section background images and main visuals
+- **`public/images/products/`** - Product screenshots, demos, feature illustrations
+- **`public/images/company/`** - Company/about page images
+- **`public/images/team/`** - Team member photos
+- **`public/images/logos/`** - Brand logos, partner logos, technology badges
+- **`public/images/og/`** - OpenGraph social sharing images (1200x630px recommended)
+
+To use images in your Next.js components:
+
+```tsx
+import Image from 'next/image'
+
+// Example: Hero image
+<Image
+  src="/images/hero/main-visual.jpg"
+  alt="Description"
+  width={1920}
+  height={1080}
+  priority
+/>
+
+// Example: Product screenshot
+<Image
+  src="/images/products/dashboard-screenshot.png"
+  alt="HEIMDEX Dashboard"
+  width={800}
+  height={600}
+/>
+```
+
+**Best Practices:**
+- Use WebP format for better compression (fallback to PNG/JPG)
+- Optimize images before upload (use tools like ImageOptim, Squoosh)
+- Use Next.js `Image` component for automatic optimization
+- Provide descriptive alt text for accessibility
+- For OpenGraph images: 1200x630px, < 1MB file size
 
 ## Browser Support
 

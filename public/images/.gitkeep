@@ -1,0 +1,33 @@
+# Image Assets Directory
+
+Store your image files in the appropriate subdirectories:
+
+- `hero/` - Hero section images and main visuals
+- `products/` - Product screenshots, demos, feature illustrations
+- `company/` - Company/about page images
+- `team/` - Team member photos
+- `logos/` - Brand logos, partner logos, technology badges
+- `og/` - OpenGraph social sharing images (1200x630px recommended)
+
+## Usage
+
+Import images in Next.js components using the `next/image` component:
+
+```tsx
+import Image from 'next/image'
+
+<Image
+  src="/images/hero/your-image.jpg"
+  alt="Description"
+  width={1920}
+  height={1080}
+  priority
+/>
+```
+
+## Best Practices
+
+- Use WebP format when possible for better compression
+- Optimize images before committing (use ImageOptim, Squoosh, etc.)
+- Use descriptive filenames (e.g., `dashboard-screenshot.png`, not `img1.png`)
+- Keep OpenGraph images at 1200x630px, < 1MB file size

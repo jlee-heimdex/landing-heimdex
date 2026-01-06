@@ -2,7 +2,8 @@ import { Locale } from '@/lib/types'
 import Hero from '@/components/sections/Hero'
 import ContentSection from '@/components/sections/ContentSection'
 import FeatureCard from '@/components/sections/FeatureCard'
-import { getLocalizedPath } from '@/lib/i18n'
+import BackedBy from '@/components/sections/BackedBy'
+import { getBookingLink } from '@/lib/i18n'
 
 interface HomePageProps {
   params: Promise<{ locale: string }>
@@ -35,6 +36,8 @@ export default async function HomePage({ params }: HomePageProps) {
       feature2Desc: '보지 않아도 긴 영상의 핵심을 한눈에. AI가 장면과 대사를 분석해 베스트 컷을 정리합니다.',
       feature3Title: '불법 유통 자동 감지',
       feature3Desc: 'AI가 24/7 실시간으로 YouTube·TikTok·Instagram을 모니터링하여 무단 복제를 탐지합니다.',
+      backedByHeadline: '믿을 수 있는 파트너와 함께',
+      backedBySubhead: 'HEIMDEX는 글로벌 벤처캐피탈 Antler의 투자를 받아 성장하고 있습니다.',
     },
     en: {
       badge: 'AI-powered video management, search, and distribution protection all-in-one',
@@ -58,6 +61,8 @@ export default async function HomePage({ params }: HomePageProps) {
       feature2Desc: 'See the key points of long videos at a glance without watching. AI analyzes scenes and dialogues to organize best cuts.',
       feature3Title: 'Automatic illegal distribution detection',
       feature3Desc: 'AI monitors YouTube, TikTok, and Instagram 24/7 in real-time to detect unauthorized copies.',
+      backedByHeadline: 'Trusted Partners',
+      backedBySubhead: 'HEIMDEX is backed by Antler, a global early-stage venture capital firm.',
     },
   }
 
@@ -77,7 +82,7 @@ export default async function HomePage({ params }: HomePageProps) {
         subhead={text.subhead}
         description={text.description}
         ctaText={text.cta}
-        ctaHref={getLocalizedPath('/contact', locale)}
+        ctaHref={getBookingLink(locale)}
       />
 
       <ContentSection title={text.problemTitle} dark>
@@ -95,6 +100,8 @@ export default async function HomePage({ params }: HomePageProps) {
           <FeatureCard title={text.feature3Title} description={text.feature3Desc} />
         </div>
       </ContentSection>
+
+      <BackedBy headline={text.backedByHeadline} subhead={text.backedBySubhead} />
     </>
   )
 }

@@ -184,7 +184,23 @@
 
 ---
 
-## 7) Testimonials Section
+## 7) Backed By Section
+
+**Headline**
+
+* 믿을 수 있는 파트너와 함께
+
+**Subhead**
+
+* HEIMDEX는 글로벌 벤처캐피탈 Antler의 투자를 받아 성장하고 있습니다.
+
+**Logos**
+
+* Antler
+
+---
+
+## 8) Testimonials Section
 
 **Headline**
 
@@ -210,7 +226,7 @@
 
 ---
 
-## 8) Conversion Section (TO BE UPDATED)
+## 9) Conversion Section (TO BE UPDATED)
 
 **Current content (to remove/replace)**
 
@@ -229,7 +245,7 @@
 
 ---
 
-## 9) Footer
+## 10) Footer
 
 **English line**
 
