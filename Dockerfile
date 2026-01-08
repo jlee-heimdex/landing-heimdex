@@ -14,6 +14,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Build args for NEXT_PUBLIC_* variables (must be available at build time)
+ARG NEXT_PUBLIC_FEATUREBASE_APP_ID
+ENV NEXT_PUBLIC_FEATUREBASE_APP_ID=$NEXT_PUBLIC_FEATUREBASE_APP_ID
+
 # Copy package files
 COPY package.json package-lock.json* ./
 
