@@ -16,7 +16,7 @@ export default function BackedBy({
   subhead,
   logos = [
     {
-      src: '/images/logos/antler_no-bg.png',
+      src: '/images/logos/antler-horizontal.png',
       alt: 'Antler',
       width: 200,
       height: 60,
