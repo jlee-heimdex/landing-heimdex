@@ -21,6 +21,12 @@ export default function BackedBy({
       width: 200,
       height: 60,
     },
+    {
+      src: '/images/logos/nvidia-inception-program-badge-rgb-for-screen.png',
+      alt: 'NVIDIA Inception Program',
+      width: 200,
+      height: 60,
+    },
   ],
 }: BackedByProps) {
   return (
