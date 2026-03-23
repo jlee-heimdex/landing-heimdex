@@ -1,75 +1,79 @@
-import Link from 'next/link'
+import Image from 'next/image'
 import { ReactNode } from 'react'
 
 interface HeroProps {
-  badge?: string
-  headline: string | ReactNode
-  subhead?: string
-  description?: string
-  ctaText: string
+  headline: ReactNode
+  description: string
+  ctaLabel: string
   ctaHref: string
-  children?: ReactNode
+  secondaryCtaLabel: string
+  secondaryCtaHref: string
+  imageSrc: string
+  imageAlt: string
 }
 
 export default function Hero({
-  badge,
   headline,
-  subhead,
   description,
-  ctaText,
+  ctaLabel,
   ctaHref,
-  children,
+  secondaryCtaLabel,
+  secondaryCtaHref,
+  imageSrc,
+  imageAlt,
 }: HeroProps) {
   return (
-    <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background gradient orbs */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-accent-cyan/10 rounded-full blur-[120px] animate-float" />
-        <div
-          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-accent-violet/10 rounded-full blur-[100px] animate-float"
-          style={{ animationDelay: '1s' }}
-        />
-        <div className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-accent-pink/8 rounded-full blur-[80px]" />
-      </div>
-
-      <div className="max-w-5xl mx-auto text-center relative z-10">
-        {badge && (
-          <div className="mb-6 animate-fade-in">
-            <span className="inline-block px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-sm font-medium">
-              {badge}
-            </span>
-          </div>
-        )}
-
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 tracking-tight animate-slide-up">
+    <section className="pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold mb-5 tracking-tight leading-tight">
           {headline}
         </h1>
 
-        {subhead && (
-          <p className="text-xl sm:text-2xl font-semibold mb-4 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            {subhead}
-          </p>
-        )}
+        <p className="text-base sm:text-lg text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
+          {description}
+        </p>
 
-        {description && (
-          <p className="text-xl sm:text-2xl text-surface-400 mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            {description}
-          </p>
-        )}
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
-          {ctaHref.startsWith('http') ? (
-            <a href={ctaHref} target="_blank" rel="noopener noreferrer" className="btn btn-gradient text-lg px-8 py-4">
-              {ctaText}
-            </a>
-          ) : (
-            <Link href={ctaHref} className="btn btn-gradient text-lg px-8 py-4">
-              {ctaText}
-            </Link>
-          )}
+        {/* Product Image */}
+        <div className="relative max-w-3xl mx-auto mb-10">
+          <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-gray-200/60">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              width={1200}
+              height={720}
+              className="w-full h-auto"
+              priority
+            />
+            {/* Play button overlay */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-white transition-colors">
+                <svg className="w-6 h-6 text-gray-700 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {children && <div className="mt-16">{children}</div>}
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href={secondaryCtaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline text-sm px-6 py-3"
+          >
+            {secondaryCtaLabel}
+          </a>
+          <a
+            href={ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary text-sm px-6 py-3"
+          >
+            {ctaLabel}
+          </a>
+        </div>
       </div>
     </section>
   )

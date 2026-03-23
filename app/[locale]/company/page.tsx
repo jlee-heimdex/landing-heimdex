@@ -1,7 +1,6 @@
 import { Locale } from '@/lib/types'
-import Hero from '@/components/sections/Hero'
-import ContentSection from '@/components/sections/ContentSection'
 import { getBookingLink } from '@/lib/i18n'
+import FloatingContact from '@/components/sections/FloatingContact'
 
 interface CompanyPageProps {
   params: Promise<{ locale: string }>
@@ -10,98 +9,229 @@ interface CompanyPageProps {
 export default async function CompanyPage({ params }: CompanyPageProps) {
   const resolvedParams = await params
   const locale = resolvedParams.locale as Locale
+  const bookingLink = getBookingLink(locale)
 
   const t = {
     ko: {
-      headline: '영상 인텔리전스의 미래를 만듭니다',
-      subhead: 'HEIMDEX는 모든 영상을 검색 가능하고, 재사용 가능하며, 보호된 상태로 만듭니다',
-      description: '우리는 모든 영상이 즉시 접근 가능한 가치 있는 인사이트를 담고 있다고 믿습니다. AI 기반 분석과 지능형 조직화를 통해 영상 콘텐츠의 잠재력을 완전히 발휘하는 것이 우리의 미션입니다.',
-      cta: '문의하기',
-      missionTitle: '우리의 미션',
-      missionStatement: '영상을 수동적인 콘텐츠에서 더 나은 의사결정과 창작 작업을 이끄는 능동적이고 검색 가능한 지식으로 변환합니다.',
-      missionDesc: '영상에는 대사, 얼굴, 객체, 장면, 감정 등 풍부한 정보가 담겨 있습니다. 그러나 대부분의 조직은 수천 시간 분량의 영상에서 특정 순간을 찾는 데 어려움을 겪습니다. 우리는 영상을 의미론적 수준에서 이해하는 AI를 통해 이를 바꾸고 있으며, 모든 초를 검색 가능하고 모든 장면을 재사용 가능하게 만듭니다.',
-      valuesTitle: '우리의 가치',
-      techTitle: '우리의 기술',
-      techDesc: 'HEIMDEX의 AI Scene Intelligence는 컴퓨터 비전, 자연어 처리, 오디오 분석을 결합하여 영상 콘텐츠를 의미론적 수준에서 이해합니다.',
+      heroQuote1: '"왜 방대한 영상 속 한 장면을 찾기 위해',
+      heroQuote2: '소중한 시간을 낭비해야 할까요?"',
+      heroSub1: '하임덱스는 전수 시청과 무거운 업로드가 필요 없는',
+      heroSub2: 'AI 영상 탐색의 새로운 기준을 세웁니다.',
+      mission1: 'HEIMDEX는 데이터가 쌓이는 구조에서 벗어나,',
+      mission2: 'AI가 의미를 중심으로 콘텐츠를 관리·활용하는 시대의 표준을 만들어갑니다.',
+      joinCta: '하임덱스의 여정에 동참하세요',
+      value1Title1: '목표는 ',
+      value1Accent1: '스스로 정의',
+      value1Title2: '하고,',
+      value1Title3: '성과는 ',
+      value1Accent2: '결과로 증명',
+      value1Title4: '합니다.',
+      value1Desc: '우리는 각자가 자신의 KPI를 직접 설계하고 책임지는 \'자기 주도적 성장\'을 믿습니다.\n장소와 시간에 구애받지 않고, 오직 몰입에만 집중할 수 있는 최적의 환경을 스스로 디자인하세요.',
+      value1Tags: ['유연한 근무 환경', '자기 주도적', '자율성'],
+      value2Title1: '',
+      value2Accent1: '직급의 벽',
+      value2Title2: '을 허물고,',
+      value2Title3: '',
+      value2Accent2: '논리의 힘',
+      value2Title4: '으로 소통합니다.',
+      value2Desc: '모든 의견은 가감 없이 공유되고 치열하게 토론됩니다. 우리는 경청을 넘어 서로의 생각을 확장하는 수평적인 소통 구조 속에서 가장 정답에 가까운 결론을 찾아냅니다.',
+      value2Tags: ['수평적인 소통', '열린문화', '협업'],
+      value3Title1: '한계를 넘어서는 몰입,',
+      value3Title2: '그 이상의 ',
+      value3Accent: '성장을 지원',
+      value3Title3: '합니다.',
+      value3Desc: '난이도 높은 AI 기술적 과제를 해결하는 과정은 고되지만 확실한 성장을 보장합니다.\n하임덱스는 동료의 성장이 곧 팀의 경쟁력이라는 믿음으로, 필요한 모든 학습 리소스와 인프라를 전폭적으로 지원합니다.',
+      value3Tags: ['성장지원', '학습문화', '동료'],
+      statement1: 'HEIMDEX는 AI가 영상을 ',
+      statement1Accent1: "'이해'",
+      statement1Mid: '하고 ',
+      statement1Accent2: "'연결'",
+      statement1End: '하게 만듭니다.',
+      statement2: '단순한 저장이나 관리가 아닌, 의미 단위로 콘텐츠를 인덱싱해\n필요한 장면을 찾고, 권리를 보호하며, 새로운 가치를 만들어냅니다.',
+      statement3: '우리는 기업의 수많은 비정형 데이터를 단순한 비용이 아닌 새로운 자산으로 전환하도록 돕습니다.',
+      floatingContact: '문의하기',
     },
     en: {
-      headline: 'Building the future of video intelligence',
-      subhead: 'HEIMDEX makes every video searchable, reusable, and protected',
-      description: 'We believe that every video contains valuable insights that should be accessible instantly. Our mission is to unlock the full potential of video content through AI-powered analysis and intelligent organization.',
-      cta: 'Contact Us',
-      missionTitle: 'Our Mission',
-      missionStatement: 'To transform video from passive content into active, searchable knowledge that drives better decisions and creative work.',
-      missionDesc: 'Videos contain rich information - dialogues, faces, objects, scenes, and emotions. Yet most organizations struggle to find specific moments across thousands of hours of footage. We\'re changing that with AI that understands video at the semantic level, making every second searchable and every scene reusable.',
-      valuesTitle: 'Our Values',
-      techTitle: 'Our Technology',
-      techDesc: 'HEIMDEX\'s AI Scene Intelligence combines computer vision, natural language processing, and audio analysis to understand video content at a semantic level.',
+      heroQuote1: '"Why should we waste precious time',
+      heroQuote2: 'searching for one scene in massive video libraries?"',
+      heroSub1: 'Heimdex sets a new standard for AI video search',
+      heroSub2: 'without full viewing or heavy uploads.',
+      mission1: 'HEIMDEX breaks free from data accumulation structures,',
+      mission2: 'creating the standard for an era where AI manages and utilizes content by meaning.',
+      joinCta: 'Join the Heimdex journey',
+      value1Title1: 'Goals are ',
+      value1Accent1: 'self-defined',
+      value1Title2: ',',
+      value1Title3: 'results are ',
+      value1Accent2: 'proven by outcomes',
+      value1Title4: '.',
+      value1Desc: "We believe in 'self-driven growth' where each person designs and owns their KPIs.\nDesign your optimal environment focused purely on deep work, unconstrained by place or time.",
+      value1Tags: ['Flexible work', 'Self-driven', 'Autonomy'],
+      value2Title1: 'Breaking ',
+      value2Accent1: 'hierarchy barriers',
+      value2Title2: ',',
+      value2Title3: 'communicating with the ',
+      value2Accent2: 'power of logic',
+      value2Title4: '.',
+      value2Desc: 'All opinions are shared openly and debated rigorously. We go beyond listening to expand each other\'s thinking, finding the closest answers through flat communication structures.',
+      value2Tags: ['Flat communication', 'Open culture', 'Collaboration'],
+      value3Title1: 'Immersion beyond limits,',
+      value3Title2: 'we ',
+      value3Accent: 'support growth',
+      value3Title3: ' beyond that.',
+      value3Desc: 'Solving difficult AI technical challenges is tough but guarantees real growth.\nHeimdex fully supports all learning resources and infrastructure, believing that colleague growth is team competitiveness.',
+      value3Tags: ['Growth support', 'Learning culture', 'Colleagues'],
+      statement1: 'HEIMDEX makes AI ',
+      statement1Accent1: "'understand'",
+      statement1Mid: ' and ',
+      statement1Accent2: "'connect'",
+      statement1End: ' videos.',
+      statement2: 'Not just storage or management — indexing content by meaning,\nfinding needed scenes, protecting rights, and creating new value.',
+      statement3: 'We help enterprises transform vast unstructured data from mere cost into new assets.',
+      floatingContact: 'Contact',
     },
   }
 
   const text = t[locale]
 
-  const values = locale === 'ko' ? [
-    { title: '혁신', desc: '영상 AI 기술로 가능한 것의 경계를 넓힙니다' },
-    { title: '프라이버시 우선', desc: '영상은 절대 인프라를 떠나지 않습니다. 클라우드가 아닌 제자리에서 분석합니다.' },
-    { title: '크리에이터 역량 강화', desc: '인간의 창의성을 대체하는 것이 아니라 증폭시키는 도구를 만듭니다' },
-    { title: '투명성', desc: '우리의 AI는 설명 가능합니다. 결과가 어떻게, 왜 생성되는지 항상 알 수 있습니다.' },
-  ] : [
-    { title: 'Innovation', desc: 'We push the boundaries of what\'s possible with video AI technology' },
-    { title: 'Privacy First', desc: 'Your videos never leave your infrastructure. We analyze in place, not in the cloud.' },
-    { title: 'Creator Empowerment', desc: 'We build tools that amplify human creativity, not replace it' },
-    { title: 'Transparency', desc: 'Our AI is explainable. You always know how and why results are generated.' },
-  ]
-
   return (
     <>
-      <Hero
-        headline={text.headline}
-        subhead={text.subhead}
-        description={text.description}
-        ctaText={text.cta}
-        ctaHref={getBookingLink(locale)}
-      />
+      {/* Full-screen hero with background image */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/company/hero-office.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-black/50" />
 
-      <ContentSection title={text.missionTitle}>
-        <div className="max-w-3xl mx-auto">
-          <p className="text-2xl font-semibold mb-6 text-center">{text.missionStatement}</p>
-          <p className="text-lg text-surface-400 leading-relaxed">{text.missionDesc}</p>
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold mb-6 leading-snug">
+            {text.heroQuote1}
+            <br />
+            {text.heroQuote2}
+          </h1>
+          <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+            {text.heroSub1}
+            <br />
+            {text.heroSub2}
+          </p>
         </div>
-      </ContentSection>
 
-      <ContentSection title={text.valuesTitle} dark>
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {values.map((value, i) => (
-            <div key={i} className="card">
-              <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-              <p className="text-surface-400">{value.desc}</p>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <svg className="w-6 h-6 text-white/60 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </section>
+
+      {/* Mission */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+            {text.mission1}
+            <br />
+            {text.mission2}
+          </p>
+          <a
+            href={bookingLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-blue font-semibold text-lg sm:text-xl underline underline-offset-4 decoration-accent-blue/40 hover:decoration-accent-blue transition-colors"
+          >
+            {text.joinCta}
+          </a>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-5">
+          {/* Value 1 */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg font-bold mb-4 leading-snug">
+                {text.value1Title1}<span className="text-accent-blue">{text.value1Accent1}</span>{text.value1Title2}
+                <br />
+                {text.value1Title3}<span className="text-accent-blue">{text.value1Accent2}</span>{text.value1Title4}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed whitespace-pre-line">
+                {text.value1Desc}
+              </p>
             </div>
-          ))}
-        </div>
-      </ContentSection>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {text.value1Tags.map((tag) => (
+                <span key={tag} className="px-3 py-1 text-xs font-medium text-gray-500 border border-gray-200 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
 
-      <ContentSection title={text.techTitle}>
-        <div className="max-w-3xl mx-auto">
-          <p className="text-lg text-surface-400 leading-relaxed mb-8">{text.techDesc}</p>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {locale === 'ko' ? (
-              <>
-                <div className="card"><strong>멀티 모달 이해</strong>: 영상, 오디오, 텍스트, 메타데이터를 함께 분석</div>
-                <div className="card"><strong>의미론적 검색</strong>: 키워드가 아닌 의미로 장면 검색</div>
-                <div className="card"><strong>제로 업로드 아키텍처</strong>: 영상이 있는 곳에서 바로 처리</div>
-                <div className="card"><strong>실시간 모니터링</strong>: 플랫폼 전반에 걸쳐 무단 배포를 자동으로 감지</div>
-              </>
-            ) : (
-              <>
-                <div className="card"><strong>Multimodal Understanding</strong>: Analyzes video, audio, text, and metadata together</div>
-                <div className="card"><strong>Semantic Search</strong>: Find scenes by meaning, not just keywords</div>
-                <div className="card"><strong>Zero Upload Architecture</strong>: Process videos where they are</div>
-                <div className="card"><strong>Real-time Monitoring</strong>: Detect unauthorized distribution automatically</div>
-              </>
-            )}
+          {/* Value 2 */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg font-bold mb-4 leading-snug">
+                {text.value2Title1}<span className="text-accent-blue">{text.value2Accent1}</span>{text.value2Title2}
+                <br />
+                {text.value2Title3}<span className="text-accent-blue">{text.value2Accent2}</span>{text.value2Title4}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed whitespace-pre-line">
+                {text.value2Desc}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {text.value2Tags.map((tag) => (
+                <span key={tag} className="px-3 py-1 text-xs font-medium text-gray-500 border border-gray-200 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Value 3 */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg font-bold mb-4 leading-snug">
+                {text.value3Title1}
+                <br />
+                {text.value3Title2}<span className="text-accent-blue">{text.value3Accent}</span>{text.value3Title3}
+              </h3>
+              <p className="text-sm text-gray-500 leading-relaxed whitespace-pre-line">
+                {text.value3Desc}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-6">
+              {text.value3Tags.map((tag) => (
+                <span key={tag} className="px-3 py-1 text-xs font-medium text-gray-500 border border-gray-200 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </ContentSection>
+      </section>
+
+      {/* Statement */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <p className="text-lg sm:text-xl font-bold">
+            {text.statement1}
+            <span className="text-accent-blue">{text.statement1Accent1}</span>
+            {text.statement1Mid}
+            <span className="text-accent-blue">{text.statement1Accent2}</span>
+            {text.statement1End}
+          </p>
+          <p className="text-sm sm:text-base text-gray-500 leading-relaxed whitespace-pre-line">
+            {text.statement2}
+          </p>
+          <p className="text-base sm:text-lg font-semibold text-gray-800">
+            {text.statement3}
+          </p>
+        </div>
+      </section>
+
+      <FloatingContact label={text.floatingContact} href={bookingLink} />
     </>
   )
 }

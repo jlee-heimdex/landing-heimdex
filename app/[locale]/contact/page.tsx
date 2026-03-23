@@ -1,6 +1,7 @@
 import { Locale } from '@/lib/types'
-import ContentSection from '@/components/sections/ContentSection'
 import { getBookingLink } from '@/lib/i18n'
+import ContactForm from '@/components/contact/ContactForm'
+import FloatingContact from '@/components/sections/FloatingContact'
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>
@@ -12,72 +13,44 @@ export default async function ContactPage({ params }: ContactPageProps) {
 
   const t = {
     ko: {
-      title: 'HEIMDEX 데모 상담을 예약하세요',
-      subtitle: '15분 상담으로 현재 영상 관리 방식과 문제를 빠르게 진단하고, HEIMDEX가 줄일 수 있는 작업 시간을 함께 계산해드립니다.',
-      ctaButton: '상담 예약하기',
-      helper: '영업 메일 없이, 필요한 정보만 안내드립니다.',
-      contactTitle: '문의 정보',
-      email: '이메일',
-      website: '웹사이트',
-      address: '주소',
-      addressValue: '광주광역시 북구 안산로 75 (삼각동)',
+      brand: 'HEIMDEX',
+      headline: '데모 상담을 예약하세요',
+      description: '15분 상담으로 현재 영상 관리 방식과 문제를 빠르게 진단하고,\nHEIMDEX가 줄일 수 있는 작업 시간을 함께 계산해드립니다.',
+      floatingContact: '문의하기',
     },
     en: {
-      title: 'Book a HEIMDEX demo consultation',
-      subtitle: 'In a 15-minute call, we\'ll quickly diagnose your current video management methods and problems, and calculate the work hours HEIMDEX can save together.',
-      ctaButton: 'Book a Call',
-      helper: 'No sales emails, just the information you need.',
-      contactTitle: 'Contact Information',
-      email: 'Email',
-      website: 'Website',
-      address: 'Address',
-      addressValue: '75 Ansan-ro, Buk-gu, Gwangju',
+      brand: 'HEIMDEX',
+      headline: 'Book a demo consultation',
+      description: "In a 15-minute call, we'll quickly diagnose your current video management\nand calculate the work hours HEIMDEX can save.",
+      floatingContact: 'Contact',
     },
   }
 
   const text = t[locale]
 
   return (
-    <div className="page-wrapper">
-      <ContentSection title={text.title} subtitle={text.subtitle}>
-        <div className="max-w-2xl mx-auto">
-          {/* CTA Section */}
-          <div className="card text-center mb-12">
-            <a
-              href={getBookingLink(locale)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-gradient text-lg px-8 py-4 inline-flex"
-            >
-              {text.ctaButton}
-            </a>
-            <p className="text-sm text-surface-400 mt-4">{text.helper}</p>
+    <>
+      <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left: Intro */}
+          <div className="lg:pt-16">
+            <h1 className="text-accent-blue text-2xl sm:text-3xl font-bold mb-3">
+              {text.brand}
+            </h1>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              {text.headline}
+            </h2>
+            <p className="text-sm sm:text-base text-gray-500 leading-relaxed whitespace-pre-line">
+              {text.description}
+            </p>
           </div>
 
-          {/* Contact Information */}
-          <div className="card">
-            <h3 className="text-xl font-semibold mb-6 text-center">{text.contactTitle}</h3>
-            <div className="space-y-4 text-surface-400">
-              <div className="flex justify-between items-center py-3 border-b border-surface-700">
-                <span className="font-medium">{text.email}</span>
-                <a href="mailto:heimdex@heimdex.co" className="text-accent-cyan hover:underline">
-                  heimdex@heimdex.co
-                </a>
-              </div>
-              <div className="flex justify-between items-center py-3 border-b border-surface-700">
-                <span className="font-medium">{text.website}</span>
-                <a href="https://heimdex.co" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">
-                  heimdex.co
-                </a>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between py-3">
-                <span className="font-medium mb-1 sm:mb-0">{text.address}</span>
-                <span className="text-surface-300">{text.addressValue}</span>
-              </div>
-            </div>
-          </div>
+          {/* Right: Form */}
+          <ContactForm locale={locale} />
         </div>
-      </ContentSection>
-    </div>
+      </section>
+
+      <FloatingContact label={text.floatingContact} href={getBookingLink(locale)} />
+    </>
   )
 }

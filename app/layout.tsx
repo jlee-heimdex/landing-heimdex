@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Featurebase from '@/components/Featurebase'
 
 export const metadata: Metadata = {
   title: 'HEIMDEX - Smart Video Management Platform',
@@ -13,10 +12,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="font-body antialiased bg-surface-950 text-surface-100">
+    <html lang="ko">
+      <body className="font-body antialiased bg-white text-gray-900">
         {children}
-        <Featurebase />
       </body>
     </html>
   )

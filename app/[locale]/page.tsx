@@ -1,10 +1,11 @@
 import { Locale } from '@/lib/types'
-import Hero from '@/components/sections/Hero'
-import ContentSection from '@/components/sections/ContentSection'
-import FeatureCard from '@/components/sections/FeatureCard'
-import BackedBy from '@/components/sections/BackedBy'
-import ProductShowcase from '@/components/sections/ProductShowcase'
 import { getBookingLink } from '@/lib/i18n'
+import Hero from '@/components/sections/Hero'
+import TrustedBy from '@/components/sections/TrustedBy'
+import UseCases from '@/components/sections/UseCases'
+import TechFeatures from '@/components/sections/TechFeatures'
+import CTABanner from '@/components/sections/CTABanner'
+import FloatingContact from '@/components/sections/FloatingContact'
 
 interface HomePageProps {
   params: Promise<{ locale: string }>
@@ -16,131 +17,229 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const t = {
     ko: {
-      badge: 'AI 기반 영상 관리·검색·유통 보호를 한 번에',
-      headline1: '보지 않아도,',
-      headline2: '찾을 수 있는 영상',
-      subhead: 'From Storage to Meaning — HEIMDEX',
-      description: 'AI가 당신의 영상을 분석해, 탐색·제작·활용·보호까지 한 번에 해결합니다',
-      cta: '시작하기',
-      problemTitle: '계속 늘어나는 영상, 관리가 되지 않으신가요?',
-      problem1Title: '영상 찾다가 하루가 끝나지 않나요?',
-      problem1Desc: '컷 하나 찾으려다, 외장하드만 세 번 열었죠. "빨간 셔츠 입은 장면" 기억은 나는데, 어디 있는지 몰라요.',
-      problem2Title: '있는 영상인데, 결국 새로 만듭니다',
-      problem2Desc: '수천 개의 영상이 NAS와 구글드라이브에 쌓여 있습니다. 하지만 누가, 언제, 어디서 찍었는지조차 몰라 다시 찾을 수 없죠.',
-      problem3Title: '불펌당한 내 영상, 먼저 찾지 못하나요?',
-      problem3Desc: '유튜브, 틱톡, 인스타에서 내 영상이 돌아다닙니다. 검색해서 잡으려 해도 이미 수천 개가 노출된 뒤죠.',
-      featuresTitle: 'AI로 영상들의 의미를 이해하고 연결합니다',
-      featuresSubtitle: 'HEIMDEX는 흩어진 영상과 데이터를 하나로 통합해, AI가 자동으로 분석·정리·검색 가능한 형태로 구조화합니다.',
-      feature1Title: '필요한 장면을 단어로 찾으세요',
-      feature1Desc: '키워드만 입력하면 영상의 몇 분 몇 초, 어떤 파일에 있는지 즉시 찾아냅니다.',
-      feature2Title: 'AI 장면 요약',
-      feature2Desc: '보지 않아도 긴 영상의 핵심을 한눈에. AI가 장면과 대사를 분석해 베스트 컷을 정리합니다.',
-      feature3Title: '불법 유통 자동 감지',
-      feature3Desc: 'AI가 24/7 실시간으로 YouTube·TikTok·Instagram을 모니터링하여 무단 복제를 탐지합니다.',
-      backedByHeadline: '믿을 수 있는 파트너와 함께',
-      backedBySubhead: 'HEIMDEX는 글로벌 벤처캐피탈 Antler의 투자를 받아 성장하고 있습니다.',
-      showcase1Title: '단어만으로 영상 속 모든 장면을 찾아냅니다',
-      showcase1Desc: '사람 이름, 장소, 대사, 감정까지. HEIMDEX의 AI 검색은 영상 전체를 이해하고 원하는 순간을 정확히 찾아냅니다. 더 이상 타임라인을 스크롤하지 마세요.',
-      showcase2Title: '장면별 자동 요약으로 시간을 절약하세요',
-      showcase2Desc: '긴 영상도 AI가 자동으로 장면을 나누고 핵심 내용을 요약합니다. 트랜스크립트, 시각 분석, 감정 분석까지. 영상을 보지 않아도 모든 정보를 한눈에 파악할 수 있습니다.',
-      showcase3Title: '모든 영상을 한 곳에서 관리하세요',
-      showcase3Desc: '흩어진 영상 파일들을 HEIMDEX 대시보드에서 통합 관리하세요. 자동 분류, 상태 추적, 빠른 검색. 영상 관리가 이렇게 쉬울 수 있습니다.',
+      heroHeadline1: '보지 않아도 보이는 영상',
+      heroHeadlineBrand: 'Heimdex',
+      heroDesc: '시청과 업로드 없이 영상 분석을 혁신합니다.\n단어 검색 한 번에 핵심 구간 추출부터 숏폼 · 리포트까지 자동 생성하세요.',
+      ctaPrimary: '웹에서 체험하기',
+      ctaSecondary: '문의하기',
+      trustedLabel: 'Trusted by',
+      trustedHeadline1: '현장에서 먼저 검증된 기술력, ',
+      trustedHeadlineBrand: 'Heimdex',
+      useCasesHeadline1: "영상을 '보는' 시간보다",
+      useCasesHeadline2: "'생각하는'",
+      useCasesHeadline3: ' 시간에 집중하도록',
+      case1Tag: '수천 시간의 CCTV, 1초 만에 법적 증거로',
+      case1Title: '로펌 · 수사',
+      case1Desc: '증거 영상 전체를 돌려볼 필요 없습니다.\n행동과 맥락 검색/요약으로 결정적 증거 장면을 즉시 식별합니다.',
+      case2Tag: '하드 · NAS 아카이브 1초 검색, 즉시 쇼츠 제작',
+      case2Title: '마케터 · PD',
+      case2Desc: '흩어진 저장소를 전부 검색할 필요 없습니다.\n장면 검색 한 줄로 소스 탐색부터 AI 쇼츠까지 한 번에 끝내세요.',
+      case3Tag: '엣지 케이스 탐색부터 분석 리포트까지',
+      case3Title: '데이터 · 연구',
+      case3Desc: '특정 동작이나 오류 구간을 일일이 찾을 필요 없습니다.\n검색으로 원하는 장면만 추출하고 분석 리포트까지 자동 생성하세요.',
+      techHeadline1: '업로드 대기 없이,',
+      techHeadline2: '방대한 영상 업무를 즉시 끝내는 하임덱스의 기술',
+      tech1Title: '업로드 대기 없는 분석',
+      tech1Desc: '기가바이트급 무거운 영상, 서버에 올리는 대기 시간 없이 원본 저장 위치에서 즉시 분석합니다.',
+      tech2Title: '모든 업무 환경 연동 가능',
+      tech2Desc: '사내 서버, NAS, 로컬 PC까지. 기존 영상 보관 환경을 그대로 연동하여 클라우드 구축 부담을 없앴습니다.',
+      tech3Title: '소요시간 90% 단축',
+      tech3Desc: '영상을 끝까지 시청할 필요 없이 텍스트로 검색하세요. 필요한 구간만 찾아 맞춤형 클립과 레포트를 자동 생성합니다.',
+      tech4Title: '유출 리스크 원천 차단',
+      tech4Desc: '외부 접근이 완벽히 차단된 상태에서 가장 안전하게 분석됩니다.',
+      ctaBannerHeadline: '하임덱스 도입으로 변화될 압도적인 영상 업무 효율,',
+      ctaBannerHighlight: '무료 1달 PoC로 먼저 검토해 보세요.',
+      ctaBannerBtn: '문의하기',
+      floatingContact: '문의하기',
     },
     en: {
-      badge: 'AI-powered video management, search, and distribution protection all-in-one',
-      headline1: 'Find Your Videos',
-      headline2: 'Without Watching Them',
-      subhead: 'From Storage to Meaning — HEIMDEX',
-      description: 'AI analyzes your videos to solve search, production, utilization, and protection all at once',
-      cta: 'Get Started',
-      problemTitle: 'Overwhelmed by growing video libraries?',
-      problem1Title: 'Spending all day searching for videos?',
-      problem1Desc: 'Looking for one cut? You\'ve opened three external drives. You remember "the scene with the red shirt" but don\'t know where it is.',
-      problem2Title: 'You have the footage, but end up creating it again',
-      problem2Desc: 'Thousands of videos are stored on NAS and Google Drive. But you don\'t know who shot it, when, or where, so you can\'t find it.',
-      problem3Title: 'Can\'t find stolen content before it spreads?',
-      problem3Desc: 'Your videos are circulating on YouTube, TikTok, and Instagram. By the time you try to search and stop it, thousands are already exposed.',
-      featuresTitle: 'AI understands and connects the meaning of your videos',
-      featuresSubtitle: 'HEIMDEX integrates scattered videos and data into one, automatically analyzing, organizing, and structuring them into a searchable format with AI.',
-      feature1Title: 'Find the scenes you need with words',
-      feature1Desc: 'Just enter a keyword and instantly find which video, which minute and second the scene is in.',
-      feature2Title: 'AI Scene Summary',
-      feature2Desc: 'See the key points of long videos at a glance without watching. AI analyzes scenes and dialogues to organize best cuts.',
-      feature3Title: 'Automatic illegal distribution detection',
-      feature3Desc: 'AI monitors YouTube, TikTok, and Instagram 24/7 in real-time to detect unauthorized copies.',
-      backedByHeadline: 'Trusted Partners',
-      backedBySubhead: 'HEIMDEX is backed by Antler, a global early-stage venture capital firm.',
-      showcase1Title: 'Find every scene with just words',
-      showcase1Desc: "Person names, locations, dialogues, even emotions. HEIMDEX's AI search understands your entire video library and finds exactly what you need. Stop scrubbing through timelines.",
-      showcase2Title: 'Save time with automatic scene summaries',
-      showcase2Desc: 'Even long videos are automatically segmented and summarized by AI. Transcripts, visual analysis, emotion detection. Get all the information at a glance without watching.',
-      showcase3Title: 'Manage all your videos in one place',
-      showcase3Desc: 'Centralize your scattered video files in the HEIMDEX dashboard. Automatic classification, status tracking, instant search. Video management has never been this easy.',
+      heroHeadline1: 'See videos without watching',
+      heroHeadlineBrand: 'Heimdex',
+      heroDesc: 'Revolutionize video analysis without viewing or uploading.\nExtract key segments, generate shorts & reports with a single search.',
+      ctaPrimary: 'Try on Web',
+      ctaSecondary: 'Contact Us',
+      trustedLabel: 'Trusted by',
+      trustedHeadline1: 'Field-proven technology, ',
+      trustedHeadlineBrand: 'Heimdex',
+      useCasesHeadline1: "Less time 'watching' videos,",
+      useCasesHeadline2: "'thinking'",
+      useCasesHeadline3: ' more time focusing',
+      case1Tag: 'Thousands of hours of CCTV, legal evidence in 1 second',
+      case1Title: 'Law · Investigation',
+      case1Desc: 'No need to review entire evidence footage.\nInstantly identify decisive evidence scenes with behavior and context search/summary.',
+      case2Tag: 'HDD · NAS archive search in 1 second, instant shorts creation',
+      case2Title: 'Marketer · PD',
+      case2Desc: 'No need to search all scattered storage.\nFrom source browsing to AI shorts with just one scene search.',
+      case3Tag: 'From edge case exploration to analysis reports',
+      case3Title: 'Data · Research',
+      case3Desc: "No need to manually find specific actions or error segments.\nSearch to extract desired scenes and auto-generate analysis reports.",
+      techHeadline1: 'Without upload delays,',
+      techHeadline2: "Heimdex's technology to instantly handle massive video work",
+      tech1Title: 'Analysis without upload wait',
+      tech1Desc: 'Analyze gigabyte-heavy videos instantly from the original storage location without server upload delays.',
+      tech2Title: 'Compatible with all work environments',
+      tech2Desc: 'Internal servers, NAS, local PCs. Seamlessly integrates with existing video storage without cloud migration burden.',
+      tech3Title: '90% time reduction',
+      tech3Desc: 'Search with text instead of watching entire videos. Auto-generate custom clips and reports from targeted segments.',
+      tech4Title: 'Block leak risks at source',
+      tech4Desc: 'Analyzed in the safest environment with external access completely blocked.',
+      ctaBannerHeadline: 'Overwhelming video work efficiency with Heimdex,',
+      ctaBannerHighlight: 'Start with a free 1-month PoC.',
+      ctaBannerBtn: 'Contact Us',
+      floatingContact: 'Contact',
     },
   }
 
   const text = t[locale]
+  const bookingLink = getBookingLink(locale)
+
+  const trustedLogos = [
+    { src: '/images/logos/antler-horizontal.png', alt: 'Antler', width: 120, height: 40 },
+    { src: '/images/logos/kibo.png', alt: 'Kibo', width: 120, height: 40 },
+    { src: '/images/logos/nvidia-inception-program-badge-rgb-for-screen.png', alt: 'NVIDIA', width: 120, height: 40 },
+    { src: '/images/logos/yonsei-university.png', alt: 'Yonsei University', width: 140, height: 40 },
+    { src: '/images/logos/chxxta.png', alt: 'Chxxta', width: 120, height: 40 },
+  ]
+
+  const useCases = [
+    {
+      tag: text.case1Tag,
+      title: text.case1Title,
+      description: text.case1Desc,
+      imageSrc: '/images/usecases/law-investigation.jpg',
+      imageAlt: text.case1Title,
+    },
+    {
+      tag: text.case2Tag,
+      title: text.case2Title,
+      description: text.case2Desc,
+      imageSrc: '/images/usecases/marketer-pd.jpg',
+      imageAlt: text.case2Title,
+    },
+    {
+      tag: text.case3Tag,
+      title: text.case3Title,
+      description: text.case3Desc,
+      imageSrc: '/images/usecases/data-research.jpg',
+      imageAlt: text.case3Title,
+    },
+  ]
+
+  const techFeatures = [
+    {
+      icon: (
+        <svg className="w-8 h-8 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="2" x2="12" y2="6" />
+          <line x1="12" y1="18" x2="12" y2="22" />
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+          <line x1="2" y1="12" x2="6" y2="12" />
+          <line x1="18" y1="12" x2="22" y2="12" />
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+        </svg>
+      ),
+      title: text.tech1Title,
+      description: text.tech1Desc,
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      ),
+      title: text.tech2Title,
+      description: text.tech2Desc,
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+          <path d="M12 16l-2 4" />
+        </svg>
+      ),
+      title: text.tech3Title,
+      description: text.tech3Desc,
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-accent-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <polyline points="9 12 11 14 15 10" />
+        </svg>
+      ),
+      title: text.tech4Title,
+      description: text.tech4Desc,
+    },
+  ]
 
   return (
     <>
       <Hero
-        badge={text.badge}
         headline={
           <>
-            <span className="text-surface-100">{text.headline1}</span>
+            <span>{text.heroHeadline1}</span>
             <br />
-            <span className="gradient-text">{text.headline2}</span>
+            <span className="text-accent-blue">{text.heroHeadlineBrand}</span>
           </>
         }
-        subhead={text.subhead}
-        description={text.description}
-        ctaText={text.cta}
-        ctaHref={getBookingLink(locale)}
-      />
-
-      <ContentSection title={text.problemTitle} dark>
-        <div className="grid md:grid-cols-3 gap-6">
-          <FeatureCard title={text.problem1Title} description={text.problem1Desc} />
-          <FeatureCard title={text.problem2Title} description={text.problem2Desc} />
-          <FeatureCard title={text.problem3Title} description={text.problem3Desc} />
-        </div>
-      </ContentSection>
-
-      <ContentSection title={text.featuresTitle} subtitle={text.featuresSubtitle}>
-        <div className="grid md:grid-cols-3 gap-6">
-          <FeatureCard title={text.feature1Title} description={text.feature1Desc} />
-          <FeatureCard title={text.feature2Title} description={text.feature2Desc} />
-          <FeatureCard title={text.feature3Title} description={text.feature3Desc} />
-        </div>
-      </ContentSection>
-
-      <ProductShowcase
-        title={text.showcase1Title}
-        description={text.showcase1Desc}
+        description={text.heroDesc}
+        ctaLabel={text.ctaPrimary}
+        ctaHref={bookingLink}
+        secondaryCtaLabel={text.ctaSecondary}
+        secondaryCtaHref={bookingLink}
         imageSrc="/images/products/search-view.png"
-        imageAlt="HEIMDEX AI Search Interface"
-        imagePosition="right"
-        className="bg-surface-950"
+        imageAlt="HEIMDEX Product"
       />
 
-      <ProductShowcase
-        title={text.showcase2Title}
-        description={text.showcase2Desc}
-        imageSrc="/images/products/video-detail-page.png"
-        imageAlt="HEIMDEX Scene-by-Scene Breakdown"
-        imagePosition="left"
+      <TrustedBy
+        label={text.trustedLabel}
+        headline={
+          <>
+            {text.trustedHeadline1}
+            <span className="text-accent-blue">{text.trustedHeadlineBrand}</span>
+          </>
+        }
+        logos={trustedLogos}
       />
 
-      <ProductShowcase
-        title={text.showcase3Title}
-        description={text.showcase3Desc}
-        imageSrc="/images/products/dashboard.png"
-        imageAlt="HEIMDEX Dashboard"
-        imagePosition="right"
-        className="bg-surface-950"
+      <UseCases
+        headline={
+          <>
+            {text.useCasesHeadline1}
+            <br />
+            <span className="text-accent-blue">{text.useCasesHeadline2}</span>
+            {text.useCasesHeadline3}
+          </>
+        }
+        cases={useCases}
       />
 
-      <BackedBy headline={text.backedByHeadline} subhead={text.backedBySubhead} />
+      <TechFeatures
+        headline={
+          <>
+            <span className="text-accent-blue">{text.techHeadline1}</span>
+            <br />
+            {text.techHeadline2}
+          </>
+        }
+        features={techFeatures}
+      />
+
+      <CTABanner
+        headline={text.ctaBannerHeadline}
+        highlight={text.ctaBannerHighlight}
+        ctaLabel={text.ctaBannerBtn}
+        ctaHref={bookingLink}
+      />
+
+      <FloatingContact
+        label={text.floatingContact}
+        href={bookingLink}
+      />
     </>
   )
 }

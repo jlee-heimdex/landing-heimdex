@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Locale } from '@/lib/types'
 import { extractPathWithoutLocale, getLocalizedPath, getBookingLink } from '@/lib/i18n'
@@ -12,15 +13,13 @@ interface NavigationProps {
 const navItems = {
   ko: [
     { href: '/', label: '홈' },
-    { href: '/product/entertainment', label: '제품' },
-    { href: '/pricing', label: '가격' },
+    { href: '/product', label: '제품' },
     { href: '/company', label: '회사' },
     { href: '/contact', label: '문의' },
   ],
   en: [
     { href: '/', label: 'Home' },
-    { href: '/product/entertainment', label: 'Product' },
-    { href: '/pricing', label: 'Pricing' },
+    { href: '/product', label: 'Product' },
     { href: '/company', label: 'Company' },
     { href: '/contact', label: 'Contact' },
   ],
@@ -31,28 +30,23 @@ export default function Navigation({ locale }: NavigationProps) {
   const pathWithoutLocale = extractPathWithoutLocale(pathname)
   const items = navItems[locale]
 
-  const otherLocale: Locale = locale === 'ko' ? 'en' : 'ko'
-  const switchLocalePath = getLocalizedPath(pathWithoutLocale, otherLocale)
-
   return (
-    <nav className="fixed top-0 w-full z-50 bg-surface-900/80 backdrop-blur-xl border-b border-surface-700/50">
+    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
       <div className="section-container">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href={getLocalizedPath('/', locale)} className="flex items-center gap-3">
-            <div className="relative w-8 h-8">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-accent-cyan via-accent-violet to-accent-pink opacity-80" />
-              <div className="absolute inset-[2px] rounded-[6px] bg-surface-900 flex items-center justify-center">
-                <svg className="w-4 h-4 text-accent-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <polygon points="23 7 16 12 23 17 23 7" />
-                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                </svg>
-              </div>
-            </div>
-            <span className="text-xl font-bold gradient-text">HEIMDEX</span>
+          <Link href={getLocalizedPath('/', locale)} className="flex items-center gap-2">
+            <Image
+              src="/images/logos/heimdex-logo.svg"
+              alt="HEIMDEX"
+              width={140}
+              height={28}
+              className="h-7 w-auto"
+              priority
+            />
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Center Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {items.map((item) => {
               const fullPath = getLocalizedPath(item.href, locale)
@@ -65,28 +59,30 @@ export default function Navigation({ locale }: NavigationProps) {
                 <Link
                   key={item.href}
                   href={fullPath}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'text-surface-100 bg-surface-800'
-                      : 'text-surface-400 hover:text-surface-100 hover:bg-surface-800/50'
+                      ? 'text-gray-900'
+                      : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
                   {item.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-accent-blue rounded-full" />
+                  )}
                 </Link>
               )
             })}
           </div>
 
-          {/* Right side: Language + CTA */}
+          {/* Right: CTA */}
           <div className="flex items-center gap-3">
-            <Link
-              href={switchLocalePath}
-              className="px-3 py-1.5 text-sm text-surface-400 hover:text-surface-100 transition-colors"
+            <a
+              href={getBookingLink(locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary text-sm px-4 py-2"
             >
-              {locale === 'ko' ? 'EN' : 'KO'}
-            </Link>
-            <a href={getBookingLink(locale)} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-sm">
-              {locale === 'ko' ? '등록하기' : 'Sign Up'}
+              {locale === 'ko' ? '체험하기' : 'Try It'}
             </a>
           </div>
         </div>
