@@ -15,9 +15,9 @@ export default function Footer({ locale }: FooterProps) {
       inquiry: '도입문의',
     },
     en: {
-      privacy: 'Privacy Policy',
+      privacy: 'Privacy',
       terms: 'Terms',
-      inquiry: 'Inquiry',
+      inquiry: 'Contact',
     },
   }
 

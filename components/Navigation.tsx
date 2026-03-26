@@ -4,7 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Locale } from '@/lib/types'
-import { extractPathWithoutLocale, getLocalizedPath, getBookingLink } from '@/lib/i18n'
+import { useRouter } from 'next/navigation'
+import { extractPathWithoutLocale, getLocalizedPath, getBookingLink, switchLocale } from '@/lib/i18n'
 
 interface NavigationProps {
   locale: Locale
@@ -27,8 +28,14 @@ const navItems = {
 
 export default function Navigation({ locale }: NavigationProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const pathWithoutLocale = extractPathWithoutLocale(pathname)
   const items = navItems[locale]
+  const otherLocale = locale === 'ko' ? 'en' : 'ko'
+
+  const handleLocaleSwitch = () => {
+    router.push(switchLocale(pathname, otherLocale))
+  }
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
@@ -74,8 +81,14 @@ export default function Navigation({ locale }: NavigationProps) {
             })}
           </div>
 
-          {/* Right: CTA */}
+          {/* Right: Language toggle + CTA */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={handleLocaleSwitch}
+              className="px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-900 border border-gray-200 rounded-lg transition-colors"
+            >
+              {locale === 'ko' ? 'EN' : '한국어'}
+            </button>
             <a
               href={getBookingLink(locale)}
               target="_blank"

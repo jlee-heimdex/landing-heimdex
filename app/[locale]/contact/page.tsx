@@ -20,8 +20,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
     },
     en: {
       brand: 'HEIMDEX',
-      headline: 'Book a demo consultation',
-      description: "In a 15-minute call, we'll quickly diagnose your current video management\nand calculate the work hours HEIMDEX can save.",
+      headline: 'Book a demo',
+      description: "In 15 minutes, we'll assess your current video workflow\nand show you exactly how much time Heimdex can save.",
       floatingContact: 'Contact',
     },
   }
