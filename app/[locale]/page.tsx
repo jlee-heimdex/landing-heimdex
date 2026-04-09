@@ -188,7 +188,7 @@ export default async function HomePage({ params }: HomePageProps) {
         }
         description={text.heroDesc}
         ctaLabel={text.ctaPrimary}
-        ctaHref={bookingLink}
+        ctaHref="https://playground.heimdex.co"
         secondaryCtaLabel={text.ctaSecondary}
         secondaryCtaHref={bookingLink}
         imageSrc="/images/products/search-view.png"

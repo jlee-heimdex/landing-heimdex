@@ -262,7 +262,7 @@ export default function ProductPageClient({ locale, bookingLink }: ProductPageCl
           </h2>
 
           <a
-            href={bookingLink}
+            href="https://playground.heimdex.co"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary text-sm px-6 py-3 inline-flex"

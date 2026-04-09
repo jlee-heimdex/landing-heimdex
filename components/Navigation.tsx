@@ -90,7 +90,7 @@ export default function Navigation({ locale }: NavigationProps) {
               {locale === 'ko' ? 'EN' : '한국어'}
             </button>
             <a
-              href={getBookingLink(locale)}
+              href="https://playground.heimdex.co"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary text-sm px-4 py-2"
