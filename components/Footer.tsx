@@ -41,11 +41,26 @@ export default function Footer({ locale }: FooterProps) {
           {/* Right: Links */}
           <div className="flex flex-col items-end gap-1 text-sm text-gray-500">
             <div className="flex items-center gap-2">
-              <span>{text.privacy}</span>
+              <Link
+                href={getLocalizedPath('/privacy', locale)}
+                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+              >
+                {text.privacy}
+              </Link>
               <span className="text-gray-300">|</span>
-              <span>{text.terms}</span>
+              <Link
+                href={getLocalizedPath('/terms', locale)}
+                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+              >
+                {text.terms}
+              </Link>
               <span className="text-gray-300">|</span>
-              <span>{text.inquiry}</span>
+              <Link
+                href={getLocalizedPath('/contact', locale)}
+                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+              >
+                {text.inquiry}
+              </Link>
             </div>
             <a href="mailto:heimdex@heimdex.co" className="hover:text-gray-700 transition-colors">
               heimdex@heimdex.co
