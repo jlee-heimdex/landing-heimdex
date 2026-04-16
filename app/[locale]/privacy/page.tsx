@@ -1,7 +1,8 @@
+import { Metadata } from 'next'
 import { Locale } from '@/lib/types'
 import { getBookingLink } from '@/lib/i18n'
 import LegalTabs from '@/components/legal/LegalTabs'
-import LegalFloatingContact from '@/components/legal/LegalFloatingContact'
+import FloatingContact from '@/components/sections/FloatingContact'
 
 interface PrivacyPageProps {
   params: Promise<{ locale: string }>
@@ -15,6 +16,25 @@ interface Section {
   list?: { type: 'ol' | 'ul'; items: ListItem[] }
   paragraph?: string
 }
+
+const meta: Record<Locale, { title: string; description: string }> = {
+  ko: {
+    title: '개인정보 처리방침 | HEIMDEX',
+    description: '하임덱스(HEIMDEX)의 개인정보 처리방침을 안내합니다.',
+  },
+  en: {
+    title: 'Privacy Policy | HEIMDEX',
+    description: 'Learn how Heimdex collects, uses, and protects your personal information.',
+  },
+}
+
+export async function generateMetadata({ params }: PrivacyPageProps): Promise<Metadata> {
+  const { locale } = await params
+  const m = meta[(locale as Locale) || 'ko']
+  return { title: m.title, description: m.description }
+}
+
+const BODY = 'text-base font-normal text-legal-text tracking-[-0.025em] leading-[140%]'
 
 export default async function PrivacyPage({ params }: PrivacyPageProps) {
   const resolvedParams = await params
@@ -235,14 +255,11 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
 
   const text = copy[locale]
 
-  const bodyText = 'text-[16px] font-normal text-[#272833] tracking-[-0.025em] leading-[140%]'
-
   const renderList = (list: NonNullable<Section['list']>) => {
     const ListTag = list.type
-    const listClass =
-      list.type === 'ol'
-        ? `list-decimal ps-6 ${bodyText}`
-        : `list-disc ps-6 ${bodyText}`
+    const listClass = list.type === 'ol'
+      ? `list-decimal ps-6 ${BODY}`
+      : `list-disc ps-6 ${BODY}`
     return (
       <ListTag className={listClass}>
         {list.items.map((item, i) => {
@@ -252,7 +269,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
           return (
             <li key={i}>
               {item.text}
-              <ul className={`list-disc ps-6 ${bodyText}`}>
+              <ul className={`list-disc ps-6 ${BODY}`}>
                 {item.sublist.map((sub, j) => (
                   <li key={j}>{sub}</li>
                 ))}
@@ -265,32 +282,32 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
   }
 
   return (
-    <section className="bg-[#FCFCFF] pt-[69px] pb-20">
+    <section className="bg-legal-bg pt-24 pb-20">
       <div className="flex justify-center px-6 mb-16">
         <LegalTabs locale={locale} active="privacy" />
       </div>
       <div className="max-w-[840px] mx-auto px-6 flex flex-col gap-8">
-        <div className="flex flex-col gap-[10px]">
-          <h1 className="text-[18px] font-bold text-[#272833] tracking-[-0.025em] leading-[140%]">
+        <div className="flex flex-col gap-2.5">
+          <h1 className="text-lg font-bold text-legal-text tracking-[-0.025em] leading-[140%]">
             {text.title}
           </h1>
-          <p className={bodyText}>{text.intro}</p>
+          <p className={BODY}>{text.intro}</p>
         </div>
 
         <div className="flex flex-col gap-6">
           {text.sections.map((section) => (
-            <div key={section.title} className="flex flex-col gap-[10px]">
-              <h2 className="text-[16px] font-bold text-[#272833] tracking-[-0.025em] leading-[140%]">
+            <div key={section.title} className="flex flex-col gap-2.5">
+              <h2 className="text-base font-bold text-legal-text tracking-[-0.025em] leading-[140%]">
                 {section.title}
               </h2>
-              {section.intro && <p className={bodyText}>{section.intro}</p>}
+              {section.intro && <p className={BODY}>{section.intro}</p>}
               {section.list && renderList(section.list)}
-              {section.paragraph && <p className={bodyText}>{section.paragraph}</p>}
+              {section.paragraph && <p className={BODY}>{section.paragraph}</p>}
             </div>
           ))}
         </div>
 
-        <LegalFloatingContact label={floatingLabel} href={getBookingLink(locale)} />
+        <FloatingContact label={floatingLabel} href={getBookingLink(locale)} />
       </div>
     </section>
   )

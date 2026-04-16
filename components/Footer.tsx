@@ -43,21 +43,21 @@ export default function Footer({ locale }: FooterProps) {
             <div className="flex items-center gap-2">
               <Link
                 href={getLocalizedPath('/privacy', locale)}
-                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+                className="text-legal-text font-medium tracking-[-0.025em] transition-colors duration-150 hover:text-accent-blue"
               >
                 {text.privacy}
               </Link>
               <span className="text-gray-300">|</span>
               <Link
                 href={getLocalizedPath('/terms', locale)}
-                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+                className="text-legal-text font-medium tracking-[-0.025em] transition-colors duration-150 hover:text-accent-blue"
               >
                 {text.terms}
               </Link>
               <span className="text-gray-300">|</span>
               <Link
                 href={getLocalizedPath('/contact', locale)}
-                className="text-[#272833] font-medium tracking-[-0.025em] cursor-pointer transition-colors duration-150 hover:text-[#3991FF]"
+                className="text-legal-text font-medium tracking-[-0.025em] transition-colors duration-150 hover:text-accent-blue"
               >
                 {text.inquiry}
               </Link>

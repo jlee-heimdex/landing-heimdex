@@ -1,7 +1,8 @@
+import { Metadata } from 'next'
 import { Locale } from '@/lib/types'
 import { getBookingLink } from '@/lib/i18n'
 import LegalTabs from '@/components/legal/LegalTabs'
-import LegalFloatingContact from '@/components/legal/LegalFloatingContact'
+import FloatingContact from '@/components/sections/FloatingContact'
 
 interface TermsPageProps {
   params: Promise<{ locale: string }>
@@ -11,6 +12,25 @@ interface Section {
   title: string
   body: string
 }
+
+const meta: Record<Locale, { title: string; description: string }> = {
+  ko: {
+    title: '서비스 이용약관 | HEIMDEX',
+    description: '하임덱스(HEIMDEX) 서비스 이용약관을 안내합니다.',
+  },
+  en: {
+    title: 'Terms of Service | HEIMDEX',
+    description: 'Read the Heimdex Terms of Service governing use of our video analysis platform.',
+  },
+}
+
+export async function generateMetadata({ params }: TermsPageProps): Promise<Metadata> {
+  const { locale } = await params
+  const m = meta[(locale as Locale) || 'ko']
+  return { title: m.title, description: m.description }
+}
+
+const BODY = 'text-base font-normal text-legal-text tracking-[-0.025em] leading-[140%]'
 
 export default async function TermsPage({ params }: TermsPageProps) {
   const resolvedParams = await params
@@ -114,29 +134,29 @@ export default async function TermsPage({ params }: TermsPageProps) {
   const text = copy[locale]
 
   return (
-    <section className="bg-[#FCFCFF] pt-[69px] pb-20">
+    <section className="bg-legal-bg pt-24 pb-20">
       <div className="flex justify-center px-6 mb-16">
         <LegalTabs locale={locale} active="terms" />
       </div>
       <div className="max-w-[840px] mx-auto px-6">
-        <h1 className="text-[18px] font-bold text-[#272833] tracking-[-0.025em] leading-[140%] mb-8">
+        <h1 className="text-lg font-bold text-legal-text tracking-[-0.025em] leading-[140%] mb-8">
           {text.title}
         </h1>
 
         <div className="flex flex-col gap-6">
           {text.sections.map((section) => (
-            <div key={section.title} className="flex flex-col gap-[10px]">
-              <h2 className="text-[16px] font-bold text-[#272833] tracking-[-0.025em] leading-[140%]">
+            <div key={section.title} className="flex flex-col gap-2.5">
+              <h2 className="text-base font-bold text-legal-text tracking-[-0.025em] leading-[140%]">
                 {section.title}
               </h2>
-              <p className="text-[16px] font-normal text-[#272833] tracking-[-0.025em] leading-[140%] whitespace-pre-line">
+              <p className={`${BODY} whitespace-pre-line`}>
                 {section.body}
               </p>
             </div>
           ))}
         </div>
 
-        <LegalFloatingContact label={floatingLabel} href={getBookingLink(locale)} />
+        <FloatingContact label={floatingLabel} href={getBookingLink(locale)} />
       </div>
     </section>
   )

@@ -14,12 +14,14 @@ const labels: Record<Locale, { terms: string; privacy: string }> = {
 export default function LegalTabs({ locale, active }: LegalTabsProps) {
   const t = labels[locale]
   const tabClass = (isActive: boolean) =>
-    `flex items-center justify-center px-4 py-[10px] rounded-full text-[18px] font-semibold leading-[1.4] tracking-[-0.025em] whitespace-nowrap ${
-      isActive ? 'bg-[#E4F2FF] text-[#3991FF]' : 'text-[#C4C4C4]'
+    `flex items-center justify-center px-4 py-2.5 rounded-full text-lg font-semibold leading-[1.4] tracking-[-0.025em] whitespace-nowrap transition-colors duration-150 ${
+      isActive
+        ? 'bg-legal-tab text-accent-blue'
+        : 'text-legal-muted hover:text-surface-500'
     }`
 
   return (
-    <div className="inline-flex items-center gap-0 p-1 bg-white rounded-full shadow-[0px_4px_20px_#E8E9F8]">
+    <div className="inline-flex items-center gap-0 p-1 bg-white rounded-full shadow-[0px_4px_20px_theme(colors.legal.shadow)]">
       <Link href={`/${locale}/terms`} className={tabClass(active === 'terms')}>
         {t.terms}
       </Link>
