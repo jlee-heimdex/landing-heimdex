@@ -28,6 +28,13 @@ const config: Config = {
           900: '#0a0f1a',
           950: '#050709',
         },
+        legal: {
+          bg: '#FCFCFF',
+          text: '#272833',
+          muted: '#C4C4C4',
+          tab: '#E4F2FF',
+          shadow: '#E8E9F8',
+        },
       },
       keyframes: {
         scroll: {
